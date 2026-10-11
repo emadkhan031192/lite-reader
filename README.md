@@ -2,6 +2,8 @@
 
 A small, fast, fully offline PDF reader and viewer for Android.
 
+https://github.com/emadkhan031192/lite-reader
+
 Quiet and precise: thin hairlines, small exact type, one indigo accent. No ads,
 no account, no network calls — there is no `INTERNET` permission in the manifest
 at all.
