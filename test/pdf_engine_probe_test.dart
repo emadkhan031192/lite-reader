@@ -40,17 +40,22 @@ Future<String> _makePdf() async {
   return path;
 }
 
-Future<void> _ensurePdfium() async {
+/// Returns false (after marking the test skipped) when PDFium is unavailable.
+/// `markTestSkipped` alone does not stop the test body, so callers must
+/// return early on false.
+Future<bool> _ensurePdfium() async {
   final so = _pdfiumSo();
   if (so == null) {
     markTestSkipped('PDFium not provisioned for flutter test (no PDFIUM_SO)');
+    return false;
   }
   Pdfrx.pdfiumModulePath = so;
+  return true;
 }
 
 void main() {
   test('pdfrx opens and renders in the main isolate', () async {
-    await _ensurePdfium();
+    if (!await _ensurePdfium()) return;
     final path = await _makePdf();
     final doc = await PdfDocument.openFile(path);
     expect(doc.pages.length, 2);
@@ -64,7 +69,7 @@ void main() {
   });
 
   test('pdfrx renders inside Isolate.run', () async {
-    await _ensurePdfium();
+    if (!await _ensurePdfium()) return;
     final path = await _makePdf();
     final so = _pdfiumSo()!;
     final result = await Isolate.run(() async {

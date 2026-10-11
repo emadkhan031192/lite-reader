@@ -30,7 +30,16 @@ jobs:
       - name: Analyze
         run: flutter analyze
 
+      - name: Provision PDFium for tests
+        run: |
+          mkdir -p /tmp/pdfium
+          curl -sL -o /tmp/pdfium.tgz "https://github.com/bblanchon/pdfium-binaries/releases/download/chromium%2F7811/pdfium-linux-x64.tgz"
+          tar xzf /tmp/pdfium.tgz -C /tmp/pdfium
+          test -f /tmp/pdfium/lib/libpdfium.so && echo "PDFium ready"
+
       - name: Test
+        env:
+          PDFIUM_SO: /tmp/pdfium/lib/libpdfium.so
         run: flutter test
 
       - name: Decode keystore (if secrets exist)
