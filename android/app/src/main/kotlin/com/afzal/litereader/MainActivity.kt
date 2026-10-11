@@ -10,8 +10,6 @@ import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import android.view.KeyEvent
 import android.view.WindowManager
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.flutter.embedding.android.FlutterActivity
@@ -30,15 +28,12 @@ class MainActivity : FlutterActivity() {
     private lateinit var volumePlugin: VolumePlugin
     private lateinit var devicePlugin: DevicePlugin
 
-    private val openTreeLauncher: ActivityResultLauncher<Uri?> =
-        registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
-            if (::safPlugin.isInitialized) safPlugin.onTreePicked(uri)
-        }
+    private val openTreeRequestCode = 1001
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         val messenger = flutterEngine.dartExecutor.binaryMessenger
-        safPlugin = SafPlugin(this, messenger, openTreeLauncher)
+        safPlugin = SafPlugin(this, messenger, openTreeRequestCode)
         intentPlugin = IntentPlugin(this, messenger, intent)
         volumePlugin = VolumePlugin(messenger)
         devicePlugin = DevicePlugin(this, messenger)
@@ -53,6 +48,13 @@ class MainActivity : FlutterActivity() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (::volumePlugin.isInitialized && volumePlugin.onKeyDown(keyCode)) return true
         return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (::safPlugin.isInitialized) {
+            safPlugin.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -75,7 +77,7 @@ class MainActivity : FlutterActivity() {
 class SafPlugin(
     private val activity: Activity,
     messenger: BinaryMessenger,
-    private val treeLauncher: ActivityResultLauncher<Uri?>
+    private val treeRequestCode: Int
 ) : MethodChannel.MethodCallHandler {
 
     private val channel = MethodChannel(messenger, "litereader/saf")
@@ -89,7 +91,15 @@ class SafPlugin(
         when (call.method) {
             "pickDocumentTree" -> {
                 pendingTreeResult = result
-                treeLauncher.launch(null)
+                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
+                    addFlags(
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION or
+                            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
+                            Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
+                    )
+                }
+                activity.startActivityForResult(intent, treeRequestCode)
             }
             "listTree" -> {
                 val treeUri = Uri.parse(call.argument<String>("treeUri")!!)
@@ -150,6 +160,12 @@ class SafPlugin(
             }
             else -> result.notImplemented()
         }
+    }
+
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode != treeRequestCode) return
+        val uri = if (resultCode == Activity.RESULT_OK) data?.data else null
+        onTreePicked(uri)
     }
 
     fun onTreePicked(uri: Uri?) {
@@ -297,7 +313,7 @@ class IntentPlugin(
         if (intent == null) return null
         val action = intent.action
         if (action != Intent.ACTION_VIEW && action != Intent.ACTION_SEND) return null
-        val uri: Uri? = if (action == Intent.ACTION_SEND) {
+        val uri: Uri = if (action == Intent.ACTION_SEND) {
             intent.getParcelableExtra(Intent.EXTRA_STREAM) as Uri?
         } else {
             intent.data
