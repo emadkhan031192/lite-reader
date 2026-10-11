@@ -161,7 +161,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
             style: FilledButton.styleFrom(
               backgroundColor: AppColors.accent,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
             ),
@@ -245,7 +245,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
     Size size,
   ) async {
     final style = ref.read(annotateStyleProvider);
-    var nx = (rect.left / size.width).clamp(0.0, 1.0);
+    final nx = (rect.left / size.width).clamp(0.0, 1.0);
     var ny = (rect.top / size.height).clamp(0.0, 1.0);
     var nw = rect.width / size.width;
     var nh = rect.height / size.height;
@@ -438,7 +438,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
             style: FilledButton.styleFrom(
               backgroundColor: AppColors.accent,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
             ),
@@ -588,7 +588,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
             style: FilledButton.styleFrom(
               backgroundColor: AppColors.accent,
               foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
             ),
@@ -911,7 +911,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
               color: canRedo ? null : AppColors.tertiary,
               onPressed: canRedo ? () => notifier.redo() : null,
             ),
-            Expanded(
+            const Expanded(
               child: Text(
                 'Annotate',
                 textAlign: TextAlign.center,
@@ -994,7 +994,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
                 horizontal: 10,
                 vertical: 4,
               ),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.surface,
                 borderRadius: BorderRadius.all(Radius.circular(12)),
                 border: Border.fromBorderSide(BorderSide(color: AppColors.hairline, width: 1)),
@@ -1023,7 +1023,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
           child: Container(
             width: 44,
             height: 44,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.surface,
               shape: BoxShape.circle,
               border: Border.fromBorderSide(BorderSide(color: AppColors.hairline, width: 1)),
@@ -1109,7 +1109,7 @@ class _AnnotateScreenState extends ConsumerState<AnnotateScreen> {
                     style: FilledButton.styleFrom(
                       backgroundColor: AppColors.accent,
                       foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                       ),
                     ),

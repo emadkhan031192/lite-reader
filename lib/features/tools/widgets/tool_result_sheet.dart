@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cross_file/cross_file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -44,7 +43,7 @@ class _ResultFile {
 }
 
 class _ToolResultSheet extends StatefulWidget {
-  const _ToolResultSheet({super.key, required this.paths, this.note});
+  const _ToolResultSheet({required this.paths, this.note});
 
   final List<String> paths;
   final String? note;

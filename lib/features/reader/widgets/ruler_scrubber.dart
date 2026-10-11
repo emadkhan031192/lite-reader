@@ -95,7 +95,7 @@ class _RulerScrubberState extends State<RulerScrubber> {
                               horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             color: AppColors.surface,
-                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                            borderRadius: const BorderRadius.all(Radius.circular(12)),
                             border: Border.all(
                                 color: AppColors.hairline),
                           ),
@@ -138,7 +138,7 @@ class _RulerPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     canvas.drawLine(
-      Offset(0, baselineY),
+      const Offset(0, baselineY),
       Offset(size.width, baselineY),
       hairlinePaint,
     );

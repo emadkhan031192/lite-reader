@@ -80,6 +80,7 @@ class _ReorderScreenState extends State<ReorderScreen> {
     setState(() => _running = true);
     try {
       final dir = await toolOutputDir();
+      if (!mounted) return;
       final base = toolBaseName(resolved.document.displayName);
       final outPath = '${dir.path}/${base}_reordered.pdf';
       final outputs = await runToolWithProgress(
@@ -138,10 +139,9 @@ class _ReorderScreenState extends State<ReorderScreen> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: order.length,
-              onReorder: (oldIndex, newIndex) {
+              onReorderItem: (oldIndex, newIndex) {
                 setState(() {
-                  if (newIndex > oldIndex) newIndex -= 1;
-                  final page = order.removeAt(oldIndex);
+                                    final page = order.removeAt(oldIndex);
                   order.insert(newIndex, page);
                 });
               },

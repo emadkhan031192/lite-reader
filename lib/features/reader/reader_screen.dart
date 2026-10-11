@@ -398,9 +398,9 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen>
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
-          side: const BorderSide(color: AppColors.hairline),
+          side: BorderSide(color: AppColors.hairline),
         ),
         title: const Text('File details', style: AppText.body),
         content: Column(
@@ -495,7 +495,7 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen>
             if (saved != null && saved > 0) return saved;
             return switch (settings.defaultZoom) {
               DefaultZoom.fitWidth => coverZoom,
-              DefaultZoom.fitPage => fitZoom ?? coverZoom,
+              DefaultZoom.fitPage => fitZoom,
               DefaultZoom.hundred => 1.0,
             };
           },
@@ -935,7 +935,7 @@ class _DisplaySheet extends ConsumerWidget {
                 height: 56,
                 decoration: BoxDecoration(
                   color: preview,
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
                   border: Border.all(
                     color: isSelected
                         ? AppColors.accent

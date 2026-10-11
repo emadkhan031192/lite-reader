@@ -207,7 +207,7 @@ class _SignScreenState extends State<SignScreen> {
                                 : AppColors.hairline,
                             width: selected ? 2 : 1,
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: const BorderRadius.all(Radius.circular(8)),
                         ),
                         child: Image.file(
                           File(path),

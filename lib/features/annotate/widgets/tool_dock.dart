@@ -76,7 +76,7 @@ class _ToolButton extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
           decoration: BoxDecoration(
             color: active ? AppColors.accentTint : Colors.transparent,
-            borderRadius: BorderRadius.all(Radius.circular(8)),
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -52,7 +52,7 @@ class _DocThumbnailState extends ConsumerState<DocThumbnail> {
     final path = _path;
     if (path != null) {
       return ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderRadius: const BorderRadius.all(Radius.circular(4)),
         child: Image.file(
           File(path),
           width: widget.size,
@@ -64,7 +64,7 @@ class _DocThumbnailState extends ConsumerState<DocThumbnail> {
     return Container(
       width: widget.size,
       height: height,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.surface,
         border: Border.fromBorderSide(BorderSide(color: AppColors.hairline)),
         borderRadius: BorderRadius.all(Radius.circular(4)),

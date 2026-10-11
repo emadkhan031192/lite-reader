@@ -24,7 +24,7 @@ class ImagesToPdfScreen extends StatefulWidget {
 }
 
 class _ImagesToPdfScreenState extends State<ImagesToPdfScreen> {
-  late List<String> _images = List.of(widget.initialImages);
+  late final List<String> _images = List.of(widget.initialImages);
   String _pageSize = 'fit';
   bool _running = false;
 
@@ -44,6 +44,7 @@ class _ImagesToPdfScreenState extends State<ImagesToPdfScreen> {
     setState(() => _running = true);
     try {
       final dir = await toolOutputDir();
+      if (!mounted) return;
       final outPath =
           '${dir.path}/images_${DateTime.now().millisecondsSinceEpoch}.pdf';
       final outputs = await runToolWithProgress(
@@ -84,10 +85,9 @@ class _ImagesToPdfScreenState extends State<ImagesToPdfScreen> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: _images.length,
-            onReorder: (oldIndex, newIndex) {
+            onReorderItem: (oldIndex, newIndex) {
               setState(() {
-                if (newIndex > oldIndex) newIndex -= 1;
-                final path = _images.removeAt(oldIndex);
+                                final path = _images.removeAt(oldIndex);
                 _images.insert(newIndex, path);
               });
             },

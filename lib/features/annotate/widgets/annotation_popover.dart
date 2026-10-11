@@ -28,7 +28,7 @@ class AnnotationPopover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.all(Radius.circular(10)),
         border: Border.fromBorderSide(BorderSide(color: AppColors.hairline, width: 1)),

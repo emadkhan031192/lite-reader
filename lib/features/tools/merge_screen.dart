@@ -207,10 +207,9 @@ class _MergeScreenState extends State<MergeScreen> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: docs.length,
-              onReorder: (oldIndex, newIndex) {
+              onReorderItem: (oldIndex, newIndex) {
                 setState(() {
-                  if (newIndex > oldIndex) newIndex -= 1;
-                  final id = _ids.removeAt(oldIndex);
+                                    final id = _ids.removeAt(oldIndex);
                   _ids.insert(newIndex, id);
                 });
               },

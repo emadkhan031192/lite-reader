@@ -117,7 +117,7 @@ class DocPickerField extends StatelessWidget {
             Flexible(
               child: pdfs.isEmpty
                   ? const Padding(
-                      padding: const EdgeInsets.all(24),
+                      padding: EdgeInsets.all(24),
                       child: Text(
                         'No PDFs in the library yet.',
                         style: AppText.bodySecondary,

@@ -118,6 +118,7 @@ class _SplitScreenState extends State<SplitScreen> {
     setState(() => _running = true);
     try {
       final dir = await toolOutputDir();
+      if (!mounted) return;
       final base = toolBaseName(resolved.document.displayName);
       final outputs = await runToolWithProgress(
         context,

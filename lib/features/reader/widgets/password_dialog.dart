@@ -15,9 +15,9 @@ Future<String?> showPasswordDialog(BuildContext context) {
     builder: (dialogContext) {
       return AlertDialog(
         backgroundColor: AppColors.surface,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
-          side: const BorderSide(color: AppColors.hairline),
+          side: BorderSide(color: AppColors.hairline),
         ),
         title: const Text('Password required', style: AppText.body),
         content: Column(
@@ -73,7 +73,7 @@ Future<String?> showPasswordDialog(BuildContext context) {
             child: Container(
               padding: const EdgeInsets.symmetric(
                   horizontal: 16, vertical: 10),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.accent,
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),

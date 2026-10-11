@@ -49,7 +49,6 @@ Future<List<String>?> runToolWithProgress(
 
 class _ToolProgressDialog extends StatefulWidget {
   const _ToolProgressDialog({
-    super.key,
     required this.title,
     required this.params,
     required this.onDone,
@@ -140,7 +139,7 @@ Future<ResolvedDoc> resolveDocForTool(int documentId) async {
   return ResolvedDoc(document: doc, path: path, pageCount: pageCount);
 }
 
-/// App-private output folder for tool results: <docs>/LiteReader/.
+/// App-private output folder for tool results: `docs`/LiteReader/.
 Future<Directory> toolOutputDir() async {
   final docs = await getApplicationDocumentsDirectory();
   final dir = Directory(p.join(docs.path, 'LiteReader'));

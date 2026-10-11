@@ -284,7 +284,6 @@ class SettingsScreen extends ConsumerWidget {
 /// 64x44 page-color preview with an indigo ring when selected.
 class _PageColorTile extends StatelessWidget {
   const _PageColorTile({
-    super.key,
     required this.label,
     required this.color,
     required this.selected,
@@ -311,7 +310,7 @@ class _PageColorTile extends StatelessWidget {
               height: 44,
               decoration: BoxDecoration(
                 color: color,
-                borderRadius: BorderRadius.all(Radius.circular(6)),
+                borderRadius: const BorderRadius.all(Radius.circular(6)),
                 border: Border.all(
                   color:
                       selected ? AppColors.accent : AppColors.hairline,
@@ -339,7 +338,6 @@ class _PageColorTile extends StatelessWidget {
 /// Radio-style option row, 48px tall.
 class _OptionRow extends StatelessWidget {
   const _OptionRow({
-    super.key,
     required this.label,
     required this.selected,
     required this.onTap,
@@ -401,7 +399,6 @@ class _OptionRow extends StatelessWidget {
 /// Switch row, 48px tall.
 class _SwitchRow extends StatelessWidget {
   const _SwitchRow({
-    super.key,
     required this.label,
     required this.value,
     required this.onChanged,
@@ -426,7 +423,7 @@ class _SwitchRow extends StatelessWidget {
             Switch(
               value: value,
               onChanged: onChanged,
-              activeColor: AppColors.accent,
+              activeThumbColor: AppColors.accent,
             ),
           ],
         ),
@@ -437,7 +434,7 @@ class _SwitchRow extends StatelessWidget {
 
 /// Added SAF folders with a remove button each.
 class _FolderList extends ConsumerStatefulWidget {
-  const _FolderList({super.key});
+  const _FolderList();
 
   @override
   ConsumerState<_FolderList> createState() => _FolderListState();

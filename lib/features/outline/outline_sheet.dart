@@ -89,7 +89,7 @@ class _OutlineSheetState extends ConsumerState<OutlineSheet> {
                 Container(
                   width: 40,
                   height: 4,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: AppColors.hairline,
                     borderRadius: BorderRadius.all(Radius.circular(2)),
                   ),
@@ -552,7 +552,7 @@ class _PageThumbState extends State<_PageThumb> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
                   border: Border.all(
                     color: widget.isCurrent
                         ? AppColors.accent

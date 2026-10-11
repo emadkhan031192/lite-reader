@@ -73,7 +73,7 @@ class _ReaderSearchPanelState extends State<ReaderSearchPanel> {
     return Container(
       margin: const EdgeInsets.fromLTRB(12, 0, 12, 8),
       padding: const EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.all(Radius.circular(12)),
         border: Border.fromBorderSide(BorderSide(color: AppColors.hairline)),

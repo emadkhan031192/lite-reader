@@ -70,6 +70,7 @@ class _CompressScreenState extends State<CompressScreen> {
     try {
       final before = resolved.document.size;
       final dir = await toolOutputDir();
+      if (!mounted) return;
       final base = toolBaseName(resolved.document.displayName);
       final outPath = '${dir.path}/${base}_compressed.pdf';
       final outputs = await runToolWithProgress(
@@ -91,6 +92,7 @@ class _CompressScreenState extends State<CompressScreen> {
         } catch (_) {
           // Size stays 0; the sheet still lists the file.
         }
+        if (!mounted) return;
         await showToolResultSheet(
           context,
           paths: outputs,

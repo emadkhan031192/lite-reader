@@ -11,7 +11,7 @@ import '../../../core/utils/format.dart';
 import '../../../core/widgets/press_scale.dart';
 
 /// Result of the signature pad: the captured PNG, the typed/drawn name and
-/// whether the user wants a "Signed <date>" caption.
+/// whether the user wants a "Signed `date`" caption.
 class SignatureResult {
   const SignatureResult({
     required this.bytes,
@@ -74,9 +74,9 @@ class _SignaturePadDialogState extends State<_SignaturePadDialog> {
     return Dialog(
       backgroundColor: AppColors.surface,
       insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(12)),
-        side: const BorderSide(color: AppColors.hairline, width: 1),
+        side: BorderSide(color: AppColors.hairline, width: 1),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -112,10 +112,10 @@ class _SignaturePadDialogState extends State<_SignaturePadDialog> {
                         color: AppColors.hairline,
                         width: 1,
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(7)),
+                      borderRadius: const BorderRadius.all(Radius.circular(7)),
                       child: _tab == 0
                           ? _buildDrawCanvas(width)
                           : _buildTypeCanvas(width),
@@ -164,7 +164,7 @@ class _SignaturePadDialogState extends State<_SignaturePadDialog> {
                     backgroundColor: AppColors.accent,
                     foregroundColor: Colors.white,
                     disabledBackgroundColor: AppColors.hairline,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                   ),
@@ -297,7 +297,7 @@ class _SegmentedTabs extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: active ? AppColors.accentTint : Colors.transparent,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
               border: Border.all(
                 color: active ? AppColors.accent : AppColors.hairline,
                 width: 1,
