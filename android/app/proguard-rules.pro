@@ -20,5 +20,9 @@
 # cannot see; silence the warnings instead of failing the build.
 -dontwarn com.google.mlkit.**
 
+# Play Core splitcompat/splitinstall classes are referenced by the Flutter
+# embedding but never used (no deferred components); silence R8.
+-dontwarn com.google.android.play.core.**
+
 # share_plus / file_picker: keep the platform channel handlers reachable.
 -keep class androidx.** { *; }
