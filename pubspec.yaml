@@ -32,7 +32,6 @@ dependencies:
   cunning_document_scanner: ^3.0.3
   path_provider: ^2.1.6
   path: ^1.9.1
-  intl: ^0.20.3
   crypto: ^3.0.7
 
 dev_dependencies:
