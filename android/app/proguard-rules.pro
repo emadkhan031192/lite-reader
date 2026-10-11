@@ -24,5 +24,6 @@
 # embedding but never used (no deferred components); silence R8.
 -dontwarn com.google.android.play.core.**
 
-# share_plus / file_picker: keep the platform channel handlers reachable.
--keep class androidx.** { *; }
+# share_plus / file_picker use standard platform-channel patterns; R8's
+# default rules keep their handlers. Do NOT add a blanket androidx keep —
+# it pins ~4 MB of unused AndroidX (scanner SDK transitives) in the dex.
