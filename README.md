@@ -56,9 +56,25 @@ themselves render with PDFium's own fonts and are unaffected.
 
 ## Offline proof
 
-- `android/app/src/main/AndroidManifest.xml` declares no `INTERNET` permission.
+- The **release APK** (verified with `aapt dump permissions`) declares only
+  `android.permission.CAMERA`. No `INTERNET`, no `ACCESS_NETWORK_STATE`,
+  no storage permissions. Dependency SDKs (ML Kit document scanner) merge
+  network permissions into their manifests; this project strips them with
+  `tools:node="remove"` — Lite Reader itself makes zero network calls.
 - No analytics, no accounts, no network code. SAF + file picker only; camera
   permission is requested at runtime only when opening Scan to PDF.
+
+## APK sizes (release, per ABI, CI build)
+
+| ABI | Size | vs 25 MB target |
+|---|---|---|
+| arm64-v8a | 26.6 MB | 1.6 MB over |
+| armeabi-v7a | 22.3 MB | under ✓ |
+| x86_64 | 28.2 MB | 3.2 MB over (emulator-only) |
+
+The floor is structural: Flutter engine (~11.7 MB) + PDFium (~6.4 MB) alone
+are ~18 MB before any app code. Shrinkage applied: R8 + resource shrinking,
+Dart obfuscation with split debug info, subsetted fonts (~130 KB total).
 
 ## Build (GitHub Actions)
 
